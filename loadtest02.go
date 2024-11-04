@@ -229,3 +229,16 @@ func LCM(a, b int) int {
 }
 
 /********************************************       watch to Learn 		********************************************/
+
+func NthPrime(n int) int {
+	isPrime(n)
+}
+
+func isPrime(n int) bool {
+	for i := 2; i < n; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
+}

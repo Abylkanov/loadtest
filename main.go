@@ -12,7 +12,7 @@ func importSave() {
 }
 
 func main() {
-	fmt.Println(LCM(4, 6))  // 12
-	fmt.Println(LCM(21, 6)) // 42
-	fmt.Println(LCM(5, 7))  // 35
+	fmt.Println(NthPrime(1))  // 2
+	fmt.Println(NthPrime(5))  // 11
+	fmt.Println(NthPrime(10)) // 29
 }
