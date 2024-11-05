@@ -60,3 +60,46 @@ func isPrime(n int) bool {
 	}
 	return true
 }
+
+func UniquePermutations(s string) []string {
+	// Преобразуем строку в срез рун (чтобы работать с символами Unicode)
+	str := []rune(s)
+	result := []string{}
+	used := make([]bool, len(str))
+
+	// Вспомогательная рекурсивная функция для генерации перестановок
+	var backtrack func(path []rune)
+	backtrack = func(path []rune) {
+		// Если длина текущего пути равна длине строки, добавляем результат
+		if len(path) == len(str) {
+			result = append(result, string(path))
+			return
+		}
+
+		// Перебираем все символы строки
+		for i := 0; i < len(str); i++ {
+			// Если символ уже использован в текущей перестановке, пропускаем
+			if used[i] {
+				continue
+			}
+
+			// Пропускаем одинаковые символы, чтобы избежать дублирования перестановок
+			// Проверяем, если символ одинаков с предыдущим и предыдущий не был использован
+			if i > 0 && str[i] == str[i-1] && !used[i-1] {
+				continue
+			}
+
+			// Помечаем символ как использованный
+			used[i] = true
+			// Добавляем символ в текущую перестановку
+			backtrack(append(path, str[i]))
+			// Отменяем пометку использованности
+			used[i] = false
+		}
+	}
+
+	// Начинаем рекурсию с пустым путем
+	backtrack([]rune{})
+
+	return result
+}

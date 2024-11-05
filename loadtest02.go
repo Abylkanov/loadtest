@@ -298,11 +298,10 @@ func PrimeFactors(n int) []int {
 func MagicGrowth3() []string {
 	res := make([]string, 0)
 
-	// Перебираем цифры i, j, k, при этом i < j < k
 	for i := 0; i < 8; i++ {
 		for j := i + 1; j < 9; j++ {
 			for k := j + 1; k < 10; k++ {
-				// Собираем строку из цифр в возрастающем порядке
+
 				str := string(rune(i+'0')) + string(rune(j+'0')) + string(rune(k+'0'))
 				res = append(res, str)
 			}
@@ -435,5 +434,34 @@ func SumOfDigits(n int) int {
 	return sum + SumOfDigits(n/10)
 }
 
+/********************************************       watch to Learn 		********************************************/
+
 func UniquePermutations(s string) []string {
+	str := []rune(s)
+	result := []string{}
+	used := make([]bool, len(str))
+
+	var backtrack func(path []rune)
+	backtrack = func(path []rune) {
+		if len(path) == len(str) {
+			result = append(result, string(path))
+			return
+		}
+
+		for i := 0; i < len(str); i++ {
+			if used[i] {
+				continue
+			}
+			if i > 0 && str[i] == str[i-1] && !used[i-1] {
+				continue
+			}
+			used[i] = true
+			backtrack(append(path, str[i]))
+			used[i] = false
+		}
+	}
+
+	backtrack([]rune{})
+
+	return result
 }
