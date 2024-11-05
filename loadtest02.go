@@ -285,7 +285,7 @@ func PrimeFactors(n int) []int {
 	res:= make([]int, 0)
 	for n!=1 {
 		for i:=0;i<=n;i++ {
-			if isPrime2(i) && n%i == 0{
+			if isPrime(i) && n%i == 0{
 				res=append(res, i)
 				n /= i
 				break
@@ -296,16 +296,3 @@ func PrimeFactors(n int) []int {
 
 }
 
-func isPrime2(n int) bool {
-
-	if n < 2 {
-		return false
-	}
-
-	for i:=2;i*i<=n; i++ {
-		if n%i ==0 {
-			return false
-		}
-	}
-	return true
-}
