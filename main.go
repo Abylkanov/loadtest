@@ -12,7 +12,7 @@ func importSave() {
 }
 
 func main() {
-	fmt.Println(UniquePermutations("aabb")) // ["aabb", "abab", "abba", "baab", "baba", "bbaa"]
-	fmt.Println(UniquePermutations("abc"))  // ["abc", "acb", "bac", "bca", "cab", "cba"]
-	fmt.Println(UniquePermutations("aaa"))  // ["aaa"]
+	m := map[string]int{"one": 1, "two": 2, "three": 3}
+	maxKey := MapMax(m)
+	fmt.Println(maxKey) // three
 }
