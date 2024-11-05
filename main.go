@@ -12,7 +12,7 @@ func importSave() {
 }
 
 func main() {
-    fmt.Println(PrimeFactors(28))  // [2 2 7]
-    fmt.Println(PrimeFactors(100)) // [2 2 5 5]
-    fmt.Println(PrimeFactors(17))  // [17]
+	fmt.Println(UniquePermutations("aabb")) // ["aabb", "abab", "abba", "baab", "baba", "bbaa"]
+	fmt.Println(UniquePermutations("abc"))  // ["abc", "acb", "bac", "bca", "cab", "cba"]
+	fmt.Println(UniquePermutations("aaa"))  // ["aaa"]
 }

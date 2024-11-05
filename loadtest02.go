@@ -228,7 +228,7 @@ func LCM(a, b int) int {
 	return res
 }
 
-/********************************************       watch to Learn 		********************************************/
+/****************************************************************************************************************/
 
 func NthPrime(n int) int {
 	if n <= 0 {
@@ -262,17 +262,17 @@ func GeneratePrimes(n int) []int {
 	if n < 2 {
 		return nil
 	}
-	primes:=make([]int,0)
+	primes := make([]int, 0)
 
-	for i:=2; i<=n; i++ {
-		isPrime:=true
-		for j:=2; j*j<i; j++ {
-			if i%j ==0 {
-				isPrime=false
+	for i := 2; i <= n; i++ {
+		isPrime := true
+		for j := 2; j*j < i; j++ {
+			if i%j == 0 {
+				isPrime = false
 			}
 		}
 		if isPrime {
-			primes=append(primes, i)
+			primes = append(primes, i)
 		}
 	}
 	return primes
@@ -282,17 +282,158 @@ func PrimeFactors(n int) []int {
 	if n < 0 {
 		return nil
 	}
-	res:= make([]int, 0)
-	for n!=1 {
-		for i:=0;i<=n;i++ {
-			if isPrime(i) && n%i == 0{
-				res=append(res, i)
+	res := make([]int, 0)
+	for n != 1 {
+		for i := 0; i <= n; i++ {
+			if isPrime(i) && n%i == 0 {
+				res = append(res, i)
 				n /= i
 				break
 			}
 		}
 	}
 	return res
-
 }
 
+func MagicGrowth3() []string {
+	res := make([]string, 0)
+
+	// Перебираем цифры i, j, k, при этом i < j < k
+	for i := 0; i < 8; i++ {
+		for j := i + 1; j < 9; j++ {
+			for k := j + 1; k < 10; k++ {
+				// Собираем строку из цифр в возрастающем порядке
+				str := string(rune(i+'0')) + string(rune(j+'0')) + string(rune(k+'0'))
+				res = append(res, str)
+			}
+		}
+	}
+
+	return res
+}
+
+func atoi(str string) int {
+	isNegative := false
+	var res int
+	i := 0
+	if str[0] == '-' {
+		isNegative = true
+		i++
+	}
+
+	for i < len(str) {
+		if str[i] < '0' || str[i] > '9' {
+			return 0
+		} else {
+			res += int(str[i] - '0')
+			if i != len(str)-1 {
+				res *= 10
+			}
+			i++
+		}
+	}
+	if isNegative {
+		res = -res
+	}
+	return res
+}
+
+func itoa(n int) string {
+	if n == 0 {
+		return "0"
+	}
+	arr := []rune{}
+	isNegative := false
+	if n < 0 {
+		isNegative = true
+		n = -n
+	}
+
+	for n > 0 {
+		arr = append(arr, rune(n%10+'0'))
+		n /= 10
+	}
+
+	res := make([]rune, len(arr))
+	for i := 0; i < len(arr); i++ {
+		res[i] = arr[len(arr)-i-1]
+	}
+	if isNegative {
+		return "-" + string(res)
+	}
+	return string(res)
+}
+
+func UniqComb3(characters string) []string {
+	uniq := make(map[rune]bool)
+
+	for _, char := range characters {
+		if !uniq[char] {
+			uniq[char] = true
+		} else {
+			return []string{}
+		}
+	}
+	if len(characters) < 3 {
+		return []string{}
+	}
+
+	res := make([]string, 0)
+	for i := 0; i < len(characters); i++ {
+		for j := 0; j < len(characters); j++ {
+			for k := 0; k < len(characters); k++ {
+				if i != j && j != k && k != i {
+					res = append(res, string([]byte{characters[i], characters[j], characters[k]}))
+				}
+			}
+		}
+	}
+	return res
+}
+
+func TitleCase(s string) string {
+	arr := make([]rune, len(s))
+	for i := 0; i < len(s); i++ {
+		// arr=append(arr, char)
+		if s[i] >= 'A' && s[i] <= 'Z' {
+			arr[i] = rune(s[i] + 32)
+		} else {
+			arr[i] = rune(s[i])
+		}
+	}
+	inWord := false
+	for i := 0; i < len(arr); i++ {
+
+		if !inWord && toUpper(&arr[i]) {
+			inWord = true
+		}
+		if arr[i] == ' ' {
+			inWord = false
+		}
+
+	}
+	return string(arr)
+}
+
+func toUpper(r *rune) bool {
+	if *r >= 'a' && *r <= 'z' {
+		*r = *r - 32
+		return true
+	}
+	return false
+}
+
+func SumOfDigits(n int) int {
+	if n < 0 {
+		n = -n
+	}
+
+	if n == 0 {
+		return 0
+	}
+	sum := n % 10
+	return sum + SumOfDigits(n/10)
+}
+
+func UniquePermutations(s string) []string {
+}
