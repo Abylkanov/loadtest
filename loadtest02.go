@@ -250,8 +250,60 @@ func isPrime(n int) bool {
 	if n == 1 || n == 0 {
 		return false
 	}
-	for i := 2; i < n; i++ {
+	for i := 2; i*i < n; i++ {
 		if n%i == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func GeneratePrimes(n int) []int {
+	if n < 2 {
+		return nil
+	}
+	primes:=make([]int,0)
+
+	for i:=2; i<=n; i++ {
+		isPrime:=true
+		for j:=2; j*j<i; j++ {
+			if i%j ==0 {
+				isPrime=false
+			}
+		}
+		if isPrime {
+			primes=append(primes, i)
+		}
+	}
+	return primes
+}
+
+func PrimeFactors(n int) []int {
+	if n < 0 {
+		return nil
+	}
+	res:= make([]int, 0)
+	for n!=1 {
+		for i:=0;i<=n;i++ {
+			if isPrime2(i) && n%i == 0{
+				res=append(res, i)
+				n /= i
+				break
+			}
+		}
+	}
+	return res
+
+}
+
+func isPrime2(n int) bool {
+
+	if n < 2 {
+		return false
+	}
+
+	for i:=2;i*i<=n; i++ {
+		if n%i ==0 {
 			return false
 		}
 	}

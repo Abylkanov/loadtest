@@ -12,7 +12,7 @@ func importSave() {
 }
 
 func main() {
-	fmt.Println(NthPrime(1))  // 2
-	fmt.Println(NthPrime(5))  // 11
-	fmt.Println(NthPrime(10)) // 29
+    fmt.Println(PrimeFactors(28))  // [2 2 7]
+    fmt.Println(PrimeFactors(100)) // [2 2 5 5]
+    fmt.Println(PrimeFactors(17))  // [17]
 }
