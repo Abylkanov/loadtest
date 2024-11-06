@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/alem-platform/ap"
 )
 
@@ -12,13 +13,18 @@ func importSave() {
 }
 
 func main() {
-    matrix := [][]rune{
-        {1, 2, 3, 4},
-        {5, 6, 7, 8},
-        {9, 11, 12, 13},
-		{14, 15, 16, 17},
-    }
+	result := ConvertNbrBase(1465, "0123456789")
+	fmt.Println(result) // 1465
 
-    RotateMatrix180(matrix)
-	fmt.Println(matrix)
+	result = ConvertNbrBase(1465, "01")
+	fmt.Println(result) // 10110111001
+
+	result = ConvertNbrBase(1465, "01234567")
+	fmt.Println(result) // 2671
+
+	result = ConvertNbrBase(1465, "0123456789ABCDEF")
+	fmt.Println(result) // 5B9
+
+	result = ConvertNbrBase(1465, "00")
+	fmt.Println(result) //
 }

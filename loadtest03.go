@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+
 	"github.com/alem-platform/ap"
 )
 
@@ -54,12 +55,12 @@ func MapMax(m map[string]int) string {
 }
 
 func MapIntersection(m1, m2 map[string]int) map[string]int {
-	res:= make(map[string]int)
+	res := make(map[string]int)
 
 	for key, value := range m1 {
-		exist:=false
+		exist := false
 		if value, exist = m2[key]; exist {
-			res[key]=value
+			res[key] = value
 		}
 	}
 	return res
@@ -67,8 +68,8 @@ func MapIntersection(m1, m2 map[string]int) map[string]int {
 
 func MapDifference(m1, m2 map[string]int) map[string]int {
 	res := make(map[string]int)
-	
-	for key, value := range m1 { 
+
+	for key, value := range m1 {
 		if _, exist := m2[key]; !exist {
 			res[key] = value
 		}
@@ -78,52 +79,52 @@ func MapDifference(m1, m2 map[string]int) map[string]int {
 
 func MapInvert(m map[string]int) map[int]string {
 
-	res:=make(map[int]string)
+	res := make(map[int]string)
 
-	for key,value := range m {
-		res[value]=key
+	for key, value := range m {
+		res[value] = key
 	}
 	return res
 }
 
-func printArgs(){
-	args:=os.Args
+func printArgs() {
+	args := os.Args
 
-	for i:=1; i<len(args); i++ {
-		printString(itoa(i)+ ": " + args[i] +"\n")
+	for i := 1; i < len(args); i++ {
+		printString(itoa(i) + ": " + args[i] + "\n")
 	}
-	
+
 }
 func printString(s string) {
-	for _,char:= range s {
-		ap.PutRune(char) 
+	for _, char := range s {
+		ap.PutRune(char)
 	}
 }
 
 func countVowels() {
-	args:=os.Args[1:]
-	vowels:= []rune{'A', 'E','U', 'I', 'O'}
-	for i:=0; i<len(args); i++ {
-		count:=0
-		for _, char:= range args[i] {
-			for _, vowel:= range vowels {
-				if char==vowel || char==vowel+32 {
+	args := os.Args[1:]
+	vowels := []rune{'A', 'E', 'U', 'I', 'O'}
+	for i := 0; i < len(args); i++ {
+		count := 0
+		for _, char := range args[i] {
+			for _, vowel := range vowels {
+				if char == vowel || char == vowel+32 {
 					count++
-				} 
+				}
 			}
 		}
-		printString(itoa(count)+"\n")
+		printString(itoa(count) + "\n")
 	}
 
 }
 
-func uppercaseArguments(){
+func uppercaseArguments() {
 	args := os.Args[1:]
 
 	for _, arg := range args {
-		for i:=0; i<len(arg); i++ {
-			if arg[i] >='a' && arg[i] <='z' {
-				ap.PutRune(rune(arg[i]-32))
+		for i := 0; i < len(arg); i++ {
+			if arg[i] >= 'a' && arg[i] <= 'z' {
+				ap.PutRune(rune(arg[i] - 32))
 			} else {
 				ap.PutRune(rune(arg[i]))
 			}
@@ -134,10 +135,10 @@ func uppercaseArguments(){
 }
 
 func reverseEachArgument() {
-	args:=os.Args[1:]
-	
-	for _, arg:=range args {
-		for i:=len(arg)-1; i>=0; i-- {
+	args := os.Args[1:]
+
+	for _, arg := range args {
+		for i := len(arg) - 1; i >= 0; i-- {
 			ap.PutRune(rune(arg[i]))
 		}
 		ap.PutRune('\n')
@@ -145,80 +146,79 @@ func reverseEachArgument() {
 }
 
 func sumNumbers() {
-	args:= os.Args[1:]
-	sum:=0
+	args := os.Args[1:]
+	sum := 0
 
-	for _, arg:= range args {
-		if _, err:=atoiFull(arg); !err {
+	for _, arg := range args {
+		if _, err := atoiFull(arg); !err {
 			return
 		}
 	}
-	for _, arg:=range args {
-		num,_ :=atoiFull(arg)
-		sum = sum+num
-		printString(itoa(sum)+"\n")
+	for _, arg := range args {
+		num, _ := atoiFull(arg)
+		sum = sum + num
+		printString(itoa(sum) + "\n")
 	}
-	
 
 }
 
 func atoiFull(s string) (int, bool) {
 
 	var res int
-	isNegative:=false
-	i:=0
+	isNegative := false
+	i := 0
 	if len(s) == 0 {
 		return 0, false
 	}
 	if s[0] == '-' {
-		isNegative= true
+		isNegative = true
 		i++
 	}
 
-	for i<len(s) {
-		if s[i] <'0' || s[i] > '9'{
+	for i < len(s) {
+		if s[i] < '0' || s[i] > '9' {
 			return 0, false
 		}
 		res = res*10 + int(s[i]-'0')
 		i++
 	}
 	if isNegative {
-		res=-res
+		res = -res
 	}
 	return res, true
 
 }
 
 func product_numbers() {
-	args:=os.Args[1:]
-	product:=1
-	for _, arg:=range args {
-		if _,ok:= (atoiFull(arg)); !ok {
+	args := os.Args[1:]
+	product := 1
+	for _, arg := range args {
+		if _, ok := (atoiFull(arg)); !ok {
 			return
 		}
 	}
-	for _, arg:=range args {
-		num,_:=atoiFull(arg)
-		product=product*num
-		printString(itoa(product)+"\n")
+	for _, arg := range args {
+		num, _ := atoiFull(arg)
+		product = product * num
+		printString(itoa(product) + "\n")
 	}
 }
 
 func powerCalculation() {
-	args:= os.Args[1:]
-	if len(args) !=2 {
+	args := os.Args[1:]
+	if len(args) != 2 {
 		return
 	}
-	num, ok1:=atoiFull(args[0])
-	power,ok2:=atoiFull(args[1])
+	num, ok1 := atoiFull(args[0])
+	power, ok2 := atoiFull(args[1])
 	if !ok1 || !ok2 {
 		return
 	}
-	res:=1
-	for i:=0; i<power; i++ {
-		res*=num
+	res := 1
+	for i := 0; i < power; i++ {
+		res *= num
 	}
-	printString(itoa(res)+"\n")
+	printString(itoa(res) + "\n")
 }
 
 func GetMathOperation(op string) *func(int, int) int {
@@ -226,25 +226,25 @@ func GetMathOperation(op string) *func(int, int) int {
 
 	switch op {
 	case "add":
-		f = func(a,b int) int {
-			return a+b
+		f = func(a, b int) int {
+			return a + b
 		}
 	case "subtract":
-		f = func(a,b int) int {
-			return a-b
+		f = func(a, b int) int {
+			return a - b
 		}
 	case "multiply":
-		f = func(a,b int) int {
-			return a*b
-	}
+		f = func(a, b int) int {
+			return a * b
+		}
 	case "divide":
-		f = func(a,b int) int {
-			if b ==0 {
+		f = func(a, b int) int {
+			if b == 0 {
 				return 0
 			}
-			return a/b
+			return a / b
 		}
-	default: 
+	default:
 		return nil
 	}
 	return &f
@@ -253,35 +253,35 @@ func GetMathOperation(op string) *func(int, int) int {
 func GetIncrementor(start int, step int) func() int {
 	var f func() int
 	f = func() int {
-		start+=step
+		start += step
 		return start
 	}
 	return f
 }
 
 func MapFromKeys(keys []string, f func(string) int) map[string]int {
-	res:=make(map[string]int)
-	for _, key:= range keys {
-		res[key]=f(key)
+	res := make(map[string]int)
+	for _, key := range keys {
+		res[key] = f(key)
 	}
 	return res
 }
 
 func MapUpdate(m map[string]int, key string, f func(int) int) {
 
-	for k,value:= range m {
+	for k, value := range m {
 		if k == key {
-			m[k]=f(value)
+			m[k] = f(value)
 		}
 	}
 }
 
 func Sort(arr []int, fn func(int, int) bool) {
 
-	for i:=0;i<len(arr)-1; i++ {
-		for j:=0; j<len(arr)-i-1; j++ {
-			if !fn(arr[j],arr[j+1]) {
-				arr[j],arr[j+1] = arr[j+1],arr[j]
+	for i := 0; i < len(arr)-1; i++ {
+		for j := 0; j < len(arr)-i-1; j++ {
+			if !fn(arr[j], arr[j+1]) {
+				arr[j], arr[j+1] = arr[j+1], arr[j]
 			}
 		}
 	}
@@ -289,7 +289,7 @@ func Sort(arr []int, fn func(int, int) bool) {
 }
 
 func printHex() {
-	args:=os.Args[1:]
+	args := os.Args[1:]
 	if len(args) != 1 {
 		return
 	}
@@ -298,25 +298,26 @@ func printHex() {
 			return
 		}
 	}
-	num,_ :=atoiFull(args[0])
+	num, _ := atoiFull(args[0])
 	fmt.Println(num)
-	base16:="0123456789abcdef"
+	base16 := "0123456789abcdef"
 	var runes []rune
-	for num >0 {
+	for num > 0 {
 		runes = append(runes, rune(base16[num%16]))
-		num/=16
+		num /= 16
 	}
 	ap.PutRune('0')
 	ap.PutRune('x')
-	for i:=len(runes)-1; i>=0; i-- {
+	for i := len(runes) - 1; i >= 0; i-- {
 		ap.PutRune(runes[i])
 	}
 	ap.PutRune('\n')
 }
+
 /********************************************       watch to Learn 		********************************************/
 
 func primeSum() {
-	args:=os.Args[1:]
+	args := os.Args[1:]
 	if len(args) != 1 {
 		return
 	}
@@ -325,14 +326,13 @@ func primeSum() {
 			return
 		}
 	}
-	num,_ :=atoiFull(args[0])
+	num, _ := atoiFull(args[0])
 
-	res:=make([]int,0)
+	res := make([]int, 0)
 	if num < 2 {
 		return
 	}
 
-	
 	// Получаем список всех простых чисел до num
 	primes := []int{}
 	for i := 2; i <= num; i++ {
@@ -359,29 +359,135 @@ func primeSum() {
 
 /***************************************************************************************************************************/
 
-
 func RotateMatrix180(matrix [][]rune) {
-
 
 	if len(matrix) == 0 || len(matrix) != len(matrix[0]) {
 		return
 	}
 
-	arr:=make([]rune,0)
+	arr := make([]rune, 0)
 
-	for i:=0; i<len(matrix);i++ {
-		for j:=0; j<len(matrix[0]); j++ {
-			arr=append(arr,matrix[i][j])
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[0]); j++ {
+			arr = append(arr, matrix[i][j])
 		}
 	}
-	for i:=0; i<len(arr)/2; i++ {
-		arr[i], arr[len(arr)-1-i] =  arr[len(arr)-1-i], arr[i]
+	for i := 0; i < len(arr)/2; i++ {
+		arr[i], arr[len(arr)-1-i] = arr[len(arr)-1-i], arr[i]
 	}
 
-	for i:=0; i<len(matrix);i++ {
-		for j:=0; j<len(matrix[0]); j++ {
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[0]); j++ {
 			matrix[i][j] = arr[i*len(matrix)+j]
 
 		}
 	}
+}
+
+func rotateMatrix90(matrix [][]rune) {
+	if len(matrix) == 0 || len(matrix) != len(matrix[0]) {
+		return
+	}
+	res := make([][]rune, len(matrix))
+	for i := 0; i < len(matrix); i++ {
+		res[i] = make([]rune, len(matrix[i]))
+	}
+
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			res[len(matrix)-j-1][i] = matrix[i][j]
+		}
+
+	}
+	for i := 0; i < len(res); i++ {
+		fmt.Println(res[i])
+	}
+}
+
+/********************************************       watch to Learn 		********************************************/
+
+func Brackets(s string) bool {
+	stack := []rune{} // стек для хранения открывающих скобок
+
+	// Проходим по строке
+	for _, char := range s {
+		switch char {
+		case '(', '[', '{': // Открывающая скобка
+			stack = append(stack, char)
+		case ')': // Закрывающая круглая скобка
+			if len(stack) == 0 || stack[len(stack)-1] != '(' {
+				return false
+			}
+			stack = stack[:len(stack)-1] // Убираем пару скобок
+		case ']': // Закрывающая квадратная скобка
+			if len(stack) == 0 || stack[len(stack)-1] != '[' {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		case '}': // Закрывающая фигурная скобка
+			if len(stack) == 0 || stack[len(stack)-1] != '{' {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
+
+	// Если стек пуст, все скобки правильно закрыты
+	return len(stack) == 0
+}
+
+/*********************************************************************************************/
+
+func RomanToInt(s string) int {
+	roman := map[byte]int{
+		'I': 1,
+		'V': 5,
+		'X': 10,
+		'L': 50,
+		'C': 100,
+		'D': 500,
+		'M': 1000,
+	}
+
+	for _, char := range s {
+		if _, ok := roman[byte(char)]; !ok {
+			return 0
+		}
+	}
+	res := 0
+	for i := 0; i < len(s); i++ {
+		if i < len(s)-1 && roman[s[i]] < roman[s[i+1]] {
+			res -= roman[s[i]]
+		} else {
+			res += roman[s[i]]
+		}
+	}
+	return res
+}
+
+func ConvertNbrBase(n int, base string) string {
+
+	uniq := make(map[rune]bool)
+	res := ""
+	for _, c := range base {
+		if !uniq[c] {
+			uniq[c] = true
+		} else {
+			return res
+		}
+	}
+	if len(base) == 0 {
+		return res
+	}
+
+	inv := make([]byte, 0)
+	for n > 0 {
+		inv = append(inv, base[n%len(base)])
+		n /= len(base)
+	}
+	for i := 0; i < len(inv)/2; i++ {
+		inv[i], inv[len(inv)-1-i] = inv[len(inv)-1-i], inv[i]
+	}
+	res = string(inv)
+	return res
 }
