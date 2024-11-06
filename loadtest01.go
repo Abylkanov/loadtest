@@ -6,13 +6,6 @@ import (
 	"github.com/alem-platform/ap"
 )
 
-func printString(str string) {
-	for _, char := range str {
-		ap.PutRune(rune(char))
-	}
-	ap.PutRune('\n')
-}
-
 func printAlphaOdd() {
 	for i := 0; i < 26; i++ {
 		if i%2 != 0 {
