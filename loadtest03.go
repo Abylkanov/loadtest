@@ -188,3 +188,73 @@ func atoiFull(s string) (int, bool) {
 	return res, true
 
 }
+
+func product_numbers() {
+	args:=os.Args[1:]
+	product:=1
+	for _, arg:=range args {
+		if _,ok:= (atoiFull(arg)); !ok {
+			return
+		}
+	}
+	for _, arg:=range args {
+		num,_:=atoiFull(arg)
+		product=product*num
+		printString(itoa(product)+"\n")
+	}
+}
+
+func powerCalculation() {
+	args:= os.Args[1:]
+	if len(args) !=2 {
+		return
+	}
+	num, ok1:=atoiFull(args[0])
+	power,ok2:=atoiFull(args[1])
+	if !ok1 || !ok2 {
+		return
+	}
+	res:=1
+	for i:=0; i<power; i++ {
+		res*=num
+	}
+	printString(itoa(res)+"\n")
+}
+
+func GetMathOperation(op string) *func(int, int) int {
+	var f func(int, int) int
+
+	switch op {
+	case "add":
+		f = func(a,b int) int {
+			return a+b
+		}
+	case "subtract":
+		f = func(a,b int) int {
+			return a-b
+		}
+	case "multiply":
+		f = func(a,b int) int {
+			return a*b
+	}
+	case "divide":
+		f = func(a,b int) int {
+			if b ==0 {
+				return 0
+			}
+			return a/b
+		}
+	default: 
+		return nil
+	}
+	return &f
+}
+
+func GetIncrementor(start int, step int) func() int {
+	var f func() int
+	f = func() int {
+		start+=step
+		return start
+	}
+	return f
+}
