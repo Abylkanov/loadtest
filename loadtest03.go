@@ -258,3 +258,73 @@ func GetIncrementor(start int, step int) func() int {
 	}
 	return f
 }
+
+func MapFromKeys(keys []string, f func(string) int) map[string]int {
+	res:=make(map[string]int)
+	for _, key:= range keys {
+		res[key]=f(key)
+	}
+	return res
+}
+
+func MapUpdate(m map[string]int, key string, f func(int) int) {
+
+	for k,value:= range m {
+		if k == key {
+			m[k]=f(value)
+		}
+	}
+}
+
+func Sort(arr []int, fn func(int, int) bool) {
+
+	for i:=0;i<len(arr)-1; i++ {
+		for j:=0; j<len(arr)-i-1; j++ {
+			if !fn(arr[j],arr[j+1]) {
+				arr[j],arr[j+1] = arr[j+1],arr[j]
+			}
+		}
+	}
+
+}
+
+func printHex() {
+	args:=os.Args[1:]
+	if len(args) != 1 {
+		return
+	}
+	for _, char := range args[0] {
+		if char < '0' || char > '9' {
+			return
+		}
+	}
+	num,_ :=atoiFull(args[0])
+	fmt.Println(num)
+	base16:="0123456789abcdef"
+	var runes []rune
+	for num >0 {
+		runes = append(runes, rune(base16[num%16]))
+		num/=16
+	}
+	ap.PutRune('0')
+	ap.PutRune('x')
+	for i:=len(runes)-1; i>=0; i-- {
+		ap.PutRune(runes[i])
+	}
+	ap.PutRune('\n')
+}
+
+func primeSum() {
+	args:=os.Args[1:]
+	if len(args) != 1 {
+		return
+	}
+	for _, char := range args[0] {
+		if char < '0' || char > '9' {
+			return
+		}
+	}
+	num,_ :=atoiFull(args[0])
+	fmt.Println(num)
+
+}
