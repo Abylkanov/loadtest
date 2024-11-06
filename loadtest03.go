@@ -313,6 +313,7 @@ func printHex() {
 	}
 	ap.PutRune('\n')
 }
+/********************************************       watch to Learn 		********************************************/
 
 func primeSum() {
 	args:=os.Args[1:]
@@ -325,6 +326,62 @@ func primeSum() {
 		}
 	}
 	num,_ :=atoiFull(args[0])
-	fmt.Println(num)
 
+	res:=make([]int,0)
+	if num < 2 {
+		return
+	}
+
+	
+	// Получаем список всех простых чисел до num
+	primes := []int{}
+	for i := 2; i <= num; i++ {
+		if isPrime(i) {
+			primes = append(primes, i)
+		}
+	}
+
+	// Основной цикл: разлагаем число на простые числа
+	for num > 0 {
+		for _, prime := range primes {
+			// Если простое число меньше или равно текущему числу, вычитаем его
+			if prime <= num {
+				res = append(res, prime)
+				num -= prime
+				break
+			}
+		}
+	}
+
+	// Выводим результат
+	fmt.Println(res)
+}
+
+/***************************************************************************************************************************/
+
+
+func RotateMatrix180(matrix [][]rune) {
+
+
+	if len(matrix) == 0 || len(matrix) != len(matrix[0]) {
+		return
+	}
+
+	arr:=make([]rune,0)
+
+	for i:=0; i<len(matrix);i++ {
+		for j:=0; j<len(matrix[0]); j++ {
+			arr=append(arr,matrix[i][j])
+		}
+	}
+	for i:=0; i<len(arr)/2; i++ {
+		arr[i], arr[len(arr)-1-i] =  arr[len(arr)-1-i], arr[i]
+	}
+
+	for i:=0; i<len(matrix);i++ {
+		for j:=0; j<len(matrix[0]); j++ {
+			matrix[i][j] = arr[i*len(matrix)+j]
+
+		}
+	}
 }
